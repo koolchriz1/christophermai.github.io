@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Christopher Mai’s portfolio of video editing, collage, and virtual reality projects, with background on his creative practice.">
+  <title>Christopher Mai ~ portfolio</title>
+
+  <style>
+
+    /* Scroll-responsive laser accents stay in the outer margins. No idle animation loops. */
+    @font-face {
+      font-family: "Marske";
+      src: url("Marske.woff2") format("woff2"), url("Marske.ttf") format("truetype"), url("Marske.otf") format("opentype");
+      font-style: normal; font-weight: 100 900; font-display: swap;
+    }
+    :root { --bg: #090c12; --text-main: #f5f5f7; --text-muted: #aab3c3; --border-soft: #2a3241; --neon-blue: #79c9ff; --neon-pink: #ff91c7; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--text-main); font: 1rem/1.75 system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    button, input, textarea, select { font: inherit; }
+    header, main, footer { width: min(100%, 960px); margin: 0 auto; padding: 1.5rem; }
+    header { padding-top: 3rem; padding-bottom: 2.75rem; }
+    header h1, .project h2, .about-heading h1, .nav-brand { font-family: "Marske", ui-monospace, monospace; }
+    header h1 { color: #fff; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.25; letter-spacing: .07em; margin-bottom: 1.2rem; text-transform: uppercase; }
+    header p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+    header p:first-of-type { color: var(--neon-blue); margin-bottom: .55rem; }
+    .projects-grid { display: flex; flex-direction: column; gap: 4.5rem; padding-bottom: 3rem; }
+    .project { min-width: 0; opacity: 1; }
+    .project figure { width: 100%; margin: 0; }
+    .project h2 { margin: 1.6rem 0 .65rem; font-size: clamp(1.3rem, 3.2vw, 1.85rem); font-weight: 600; line-height: 1.4; letter-spacing: .035em; text-transform: uppercase; }
+    .project > p:not(.meta) { max-width: 74ch; color: #c6cdd9; line-height: 1.85; margin-top: 1rem; }
+    figure { margin: 0; }
+    video, img { display: block; width: 100%; height: auto; background: #111722; }
+    video { aspect-ratio: 16 / 9; }
+    .natural-media { height: auto; object-fit: contain; }
+    figcaption { padding-top: .7rem; color: var(--text-muted); line-height: 1.65; }
+    footer { border-top: 1px solid var(--border-soft); color: var(--text-muted); padding-top: 2rem; padding-bottom: 2rem; text-align: left; }
+
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 6rem; }
+    body { padding-top: 82px; }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--neon-blue); outline-offset: 5px; }
+    .skip-link { position: fixed; left: 1rem; top: -100px; z-index: 101; padding: .7rem 1rem; background: #101624; }
+    .skip-link:focus { top: 1rem; }
+    .site-nav { position: fixed; inset: 0 0 auto; z-index: 100; background: rgba(5,6,8,.96); border-bottom: 1px solid var(--border-soft); backdrop-filter: blur(18px); }
+    .nav-inner { max-width: 1100px; margin: auto; min-height: 76px; padding: .7rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .nav-brand { text-decoration: none; font-size: 1.4rem; font-weight: 700; letter-spacing: .12em; }
+    .nav-brand span { color: var(--neon-blue); }
+    .nav-links { display: flex; align-items: center; gap: .5rem; font-family: system-ui, sans-serif; letter-spacing: .01em; word-spacing: normal; font-size: .875rem; }
+    .nav-link, .work-menu summary { display: block; cursor: pointer; padding: .7rem .9rem; text-decoration: none; color: #bfc5d1; border-bottom: 2px solid transparent; }
+    .nav-link:hover, .work-menu summary:hover { color: white; background: #121722; }
+    .nav-link[aria-current="page"], .work-menu.has-current summary { color: var(--neon-blue); border-bottom-color: var(--neon-blue); }
+    .work-menu { position: relative; }
+    .work-menu summary { list-style: none; }
+    .work-menu summary::-webkit-details-marker { display: none; }
+    .work-menu summary::after { content: '⌄'; padding-left: .6rem; }
+    .work-menu[open] summary::after { content: '⌃'; }
+    .work-dropdown { position: absolute; right: 0; top: calc(100% + 12px); width: min(340px, calc(100vw - 32px)); padding: .5rem; background: #0c1019; border: 1px solid #323b4e; box-shadow: 0 18px 55px #0009; }
+    .work-dropdown a { display: block; padding: .9rem; text-decoration: none; line-height: 1.5; }
+    .work-dropdown a:hover, .work-dropdown a[aria-current="page"] { background: #182232; color: var(--neon-blue); }
+    .work-dropdown small { display: block; color: #a3a7b3; font-size: .75rem; margin-top: .2rem; }
+    .project-pagination { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .eyebrow { color: var(--neon-blue); font: 500 .875rem/1.5 system-ui, sans-serif; text-transform: uppercase; letter-spacing: .15em; }
+    .projects-grid { margin-top: .5rem; }
+    .project > p:not(.meta), figcaption { font-family: system-ui, sans-serif; font-size: 1rem; letter-spacing: .01em; word-spacing: normal; }
+    .project h2 a { text-decoration: none; }
+    .project h2 a:hover { color: var(--neon-blue); }
+    body[data-view="detail"] .project { opacity: 1; filter: none; transform: none; pointer-events: auto !important; }
+    body[data-view="detail"] .project figure { width: 100%; margin: 0; }
+    body[data-view="detail"] .projects-grid { padding-bottom: 3rem; }
+    .project-pagination { padding: 1.5rem 0; border-top: 1px solid var(--border-soft); font: 1rem/1.5 system-ui, sans-serif; letter-spacing: normal; }
+    .project-pagination a { padding: .5rem 0; text-underline-offset: 5px; }
+    .project-pagination a:last-child { text-align: right; }
+    .media-fallback { min-height: 240px; display: grid; place-content: center; gap: .7rem; padding: 2rem; background: #10141f; border: 1px dashed #384359; font-family: system-ui, sans-serif; text-align: center; letter-spacing: .01em; word-spacing: normal; }
+    .media-fallback span { color: var(--text-muted); font-size: .875rem; }
+    .about-heading h1 { font-size: clamp(2.6rem, 7vw, 4.5rem); line-height: 1.2; letter-spacing: .04em; margin: .8rem 0 1.3rem; text-transform: uppercase; }
+    .about-heading h1 span { color: var(--neon-blue); }
+    .placeholder-copy { border-left: 2px solid #3c4a61; padding-left: 1rem; }
+    .placeholder-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--neon-blue); display: block; margin-bottom: .45rem; }
+    footer { font-family: system-ui, sans-serif; font-size: .875rem; letter-spacing: .01em; word-spacing: normal; }
+    footer a { text-underline-offset: 4px; overflow-wrap: anywhere; }
+    @media (max-width: 600px) {
+      .nav-inner { padding: .6rem 1rem; gap: .5rem; min-height: 70px; }
+      .nav-links { gap: .1rem; }
+      .nav-link, .work-menu summary { padding: .65rem .55rem; }
+      .nav-brand { font-size: 1.1rem; }
+      .work-dropdown { position: fixed; top: 76px; left: 1rem; right: 1rem; width: auto; max-height: calc(100dvh - 100px); overflow-y: auto; }
+      .identity-lockup h1 { font-size: clamp(1.7rem, 7vw, 2.6rem); letter-spacing: .08em; overflow-wrap: anywhere; }
+      .project h2 { overflow-wrap: anywhere; }
+      .project-pagination { font-size: .875rem; gap: 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+  
+    /* Project case study: real context plus clearly marked content to add. */
+    .site-nav { background: #090c12; backdrop-filter: none; }
+    .project-details { margin-top: 2rem; font-family: system-ui, sans-serif; letter-spacing: normal; word-spacing: normal; }
+    .project-details h3 { font-size: 1.2rem; line-height: 1.5; margin-bottom: .75rem; }
+    .project-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding: 1.4rem 0; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); margin-bottom: 2rem; }
+    .project-facts dt { font-size: .875rem; color: var(--text-muted); }
+    .project-facts dd { margin-top: .25rem; font-size: 1rem; }
+    .project-details p { color: #c6cdd9; font-size: 1rem; max-width: 74ch; }
+    .project-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+    .project-media { margin-top: 2rem; }
+    .project-media > p { margin-bottom: 1.2rem; }
+    .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .media-slot { border: 1px dashed #465069; padding: 1.5rem; background: #101620; min-height: 180px; display: flex; flex-direction: column; justify-content: center; gap: .65rem; }
+    .media-slot strong { font-size: 1rem; font-weight: 600; color: #eef3fa; }
+    .media-slot p { font-size: .875rem; color: #b1bccd; }
+    .media-slot .placeholder-label { margin: 0; }
+    .media-slot.gameplay { grid-column: 1 / -1; min-height: 220px; }
+    @media (max-width: 600px) {
+      header { padding-top: 1.7rem; padding-bottom: 1.5rem; }
+      .projects-grid { gap: 3rem; }
+      .project-facts, .project-notes, .media-grid { grid-template-columns: 1fr; }
+      .project-facts { gap: 1rem; }
+      .media-slot.gameplay { min-height: 180px; }
+    }
+
+    /* A pair of restrained laser traces recalls the original site. The
+       narrow rails sit outside the content padding at every viewport width. */
+    body { position: relative; isolation: isolate; }
+    .edge-laser { position: fixed; top: 100px; bottom: 26px; width: clamp(8px, calc((100vw - 960px) / 2 - 24px), 90px); height: calc(100dvh - 126px); z-index: -1; pointer-events: none; overflow: visible; opacity: .46; }
+    .edge-laser.left { left: 5px; }
+    .edge-laser.right { right: 5px; transform: scaleX(-1); }
+    .edge-laser path { fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
+    .edge-laser .blue { stroke: #60baff; filter: drop-shadow(0 0 2px #60baff66); }
+    .edge-laser .pink { stroke: #ff79b5; opacity: .6; }
+    .site-nav::after { content: ''; position: absolute; bottom: -1px; left: 12%; right: 12%; height: 1px; background: linear-gradient(90deg, transparent, #79c9ff50, #ff91c735, transparent); pointer-events: none; }
+    .project-intro { margin-bottom: 1.6rem; }
+    .project-intro h2 { margin: 0 0 .7rem; }
+    .project-subtitle { max-width: 70ch; font-size: 1rem; line-height: 1.75; color: #b9c5d8; }
+    .about-heading { padding: 1rem 0 1.8rem; }
+    .about-heading h1 { margin: 0; }
+    .about-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; padding-bottom: 3rem; }
+    .about-card { min-width: 0; padding: 1.6rem; border: 1px solid #2d3749; border-top: 2px solid #79c9ff75; background: #10151e; }
+    .about-card:nth-child(2) { border-top-color: #ff91c775; }
+    .about-card:nth-child(3) { border-top-color: #b5b5ff75; }
+    .about-card h2 { font-size: 1.3rem; line-height: 1.4; margin-bottom: 1.2rem; }
+    .about-card p { font-size: 1rem; line-height: 1.8; color: #bec8d8; }
+    .about-card p + p { margin-top: 1.5rem; }
+    .about-contact { display: inline-block; margin-top: 1.5rem; color: var(--neon-blue); text-underline-offset: 5px; }
+    @media (max-width: 760px) {
+      .about-cards { grid-template-columns: 1fr; }
+      .about-card { padding: 1.5rem; }
+      .edge-laser { opacity: .24; }
+      .edge-laser .pink, .edge-laser .orange, .edge-laser circle { display: none; }
+    }
+
+    /* Color accents remain outside reading areas. */
+    .edge-laser .orange { stroke: #ff9a62; opacity: .55; }
+    .edge-laser circle { fill: #a5d8ff; opacity: .7; }
+    .about-profile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 250px); gap: 3rem; align-items: center; margin: 1rem 0 2.5rem; }
+    .about-profile .about-heading { padding: 0; }
+    .profile-name { color: #f5f5f7; font-size: 1.25rem; margin-top: 1.5rem; }
+    .profile-description { color: #bec8d8; max-width: 46ch; margin-top: .6rem; }
+    .origin-link { display: inline-block; color: var(--neon-blue); margin-top: 1.4rem; text-underline-offset: 5px; }
+    .portrait-placeholder, .profile-photo { width: 100%; aspect-ratio: 4 / 5; border: 1px solid #3a536f; border-top-color: #79c9ff99; border-bottom-color: #ff91c777; background: #101620; }
+    .portrait-placeholder { padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; text-align: center; }
+    .portrait-initials { font: 3.1rem/1.4 "Marske", ui-monospace, monospace; letter-spacing: .08em; color: #79c9ff; }
+    .portrait-placeholder strong { font-size: 1rem; font-weight: 500; }
+    .portrait-placeholder p { font-size: .875rem; color: var(--text-muted); }
+    .profile-photo { height: auto; object-fit: cover; }
+    .origin-story { border-top: 1px solid var(--border-soft); padding: 2.5rem 0 3rem; scroll-margin-top: 1rem; }
+    .origin-heading { margin-bottom: 1.5rem; }
+    .origin-heading h2 { font: 600 clamp(1.3rem, 3vw, 1.75rem)/1.5 "Marske", ui-monospace, monospace; letter-spacing: .035em; text-transform: uppercase; margin: .65rem 0; }
+    .origin-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.2fr); gap: 2rem; align-items: start; }
+    .origin-copy p { color: #bec8d8; line-height: 1.85; }
+    .origin-copy .origin-meta { font-size: .875rem; color: var(--text-muted); margin-top: 1.2rem; }
+    .origin-layout figcaption { font-size: .875rem; }
+    .recent-media-slot { min-height: 300px; }
+    @media (max-width: 650px) {
+      .about-profile { grid-template-columns: 1fr; gap: 1.8rem; }
+      .portrait-placeholder, .profile-photo { max-width: 240px; }
+      .origin-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+      .recent-media-slot { min-height: 220px; }
+    }
+
+    /* Only scrolling changes the visible segments. Short transitions settle
+       after input stops; no pulse, flashing text, or perpetual animation. */
+    .edge-laser { --edge-rest-opacity: .44; --edge-proximity: 0; opacity: calc(var(--edge-rest-opacity) + var(--edge-proximity) * .12); transition: opacity 220ms ease-out; }
+    .laser-interactive .edge-laser path { stroke-dasharray: 34 66; stroke-dashoffset: var(--line-offset, 0); stroke-linecap: round; opacity: var(--line-opacity, 1); transition: stroke-dashoffset 200ms ease-out, opacity 240ms ease-out; }
+    .laser-interactive .edge-laser .pink { stroke-dasharray: 25 75; }
+    .laser-interactive .edge-laser .orange { stroke-dasharray: 18 82; }
+    .laser-interactive .edge-laser .blue { filter: drop-shadow(0 0 2px #60baff66); }
+    .laser-interactive .edge-laser circle { opacity: var(--node-opacity, .3); transition: opacity 220ms ease-out; }
+    @media (max-width: 760px) { .edge-laser { --edge-rest-opacity: .24; } }
+    @media (prefers-reduced-motion: reduce) {
+      .edge-laser { --edge-proximity: 0 !important; transition: none; }
+      .laser-interactive .edge-laser path { stroke-dasharray: none; stroke-dashoffset: 0; opacity: 1; transition: none; }
+      .laser-interactive .edge-laser .pink { opacity: .6; }
+      .laser-interactive .edge-laser .orange { opacity: .55; }
+    }
+
+    /* Circuit strips occupy the gaps before content. The low-contrast tracks
+       connect the edge motif through every view without sitting under media. */
+    .section-circuit { display: block; width: calc(100% + 24px); max-width: none; height: 38px; margin: 0 -12px 1.35rem; overflow: hidden; pointer-events: none; }
+    .section-circuit path { fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; stroke-linecap: round; }
+    .circuit-blue { stroke: #79c9ff; }
+    .circuit-pink { stroke: #ff91c7; }
+    .circuit-track { opacity: .19; }
+    .circuit-signal { opacity: 0; stroke-dasharray: 12 88; }
+    .circuit-junction { fill: #ffb58e; opacity: .28; }
+    .laser-interactive .circuit-signal { stroke-dashoffset: var(--signal-offset, 12); opacity: var(--signal-opacity, 0); transition: stroke-dashoffset 260ms ease-out, opacity 280ms ease-out; }
+    .laser-interactive .circuit-junction { opacity: var(--junction-opacity, .28); transition: opacity 280ms ease-out; }
+    .about-card { position: relative; }
+    .about-card::after { content: ''; position: absolute; bottom: -1px; right: -1px; width: 20px; height: 12px; border-right: 1px solid #79c9ff70; border-bottom: 1px solid #79c9ff70; pointer-events: none; transition: border-color 200ms ease-out; }
+    .about-card:nth-child(2)::after { border-color: #ff91c770; }
+    .about-card:nth-child(3)::after { border-color: #ff9a6270; }
+    @media (hover: hover) { .about-card:hover::after { border-color: #b9dcffc0; } }
+    footer > .section-circuit { height: 28px; margin-bottom: 1rem; }
+    @media (max-width: 760px) {
+      .section-circuit { height: 28px; margin-bottom: 1.1rem; }
+      .circuit-track { opacity: .14; }
+      .laser-interactive .circuit-signal { opacity: calc(var(--signal-opacity, 0) * .6); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .laser-interactive .circuit-signal { opacity: 0; transition: none; }
+      .laser-interactive .circuit-junction { opacity: .28; transition: none; }
+      .about-card::after { transition: none; }
+    }
+  </style>
+</head>
+<body data-view="work">
+<!-- Decorative laser lines: scroll-driven segments and a gentle edge-proximity glow. -->
+<svg class="edge-laser left" aria-hidden="true" focusable="false" viewBox="0 0 90 800" preserveAspectRatio="none">
+  <path class="blue" pathLength="100" d="M 16 0 V 160 L 62 206 V 445 L 28 479 V 800" />
+  <path class="pink" pathLength="100" d="M 37 0 V 142 L 81 186 V 360 L 48 393 V 635" />
+  <path class="orange" pathLength="100" d="M 6 325 V 520 L 55 569 V 800" />
+  <circle cx="62" cy="206" r="2" />
+  <circle cx="28" cy="479" r="2" />
+</svg>
+<svg class="edge-laser right" aria-hidden="true" focusable="false" viewBox="0 0 90 800" preserveAspectRatio="none">
+  <path class="blue" pathLength="100" d="M 22 0 V 292 L 65 335 V 622 L 27 660 V 800" />
+  <path class="pink" pathLength="100" d="M 44 35 V 182 L 79 217 V 549 L 10 618 V 800" />
+  <path class="orange" pathLength="100" d="M 7 410 V 490 L 44 527 V 800" />
+  <circle cx="65" cy="335" r="2" />
+  <circle cx="27" cy="660" r="2" />
+</svg>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#work" aria-label="Christopher Mai — all work">CM<span>.</span></a>
+    <div class="nav-links">
+      <a class="nav-link" href="#work" data-route="work">All work</a>
+      <details class="work-menu">
+        <summary>Works</summary>
+        <div class="work-dropdown">
+          <a href="#recent-work" data-route="recent-work">Recent work<small>New project placeholder</small></a>
+          <a href="#mclaren" data-route="mclaren">McLaren World Tour<small>Collage</small></a>
+          <a href="#grasslands" data-route="grasslands">Grasslands: Tiny World<small>VR experience</small></a>
+        </div>
+      </details>
+      <a class="nav-link" href="#about" data-route="about">About me</a>
+    </div>
+  </div>
+</nav>
+
+
+<header id="portfolio-intro">
+  <div class="identity-lockup">
+    <h1 tabindex="-1" data-text="Christopher Mai">Christopher Mai</h1>
+    <p class="identity-subtitle-static" data-text="Media Design Artist ~ Los Angeles">Media Design Artist ~ Los Angeles</p>
+    <p class="identity-subtitle-static" data-text="University of California Santa Barbara">University of California Santa Barbara</p>
+        <p class="identity-subtitle-static" data-text="Communication Major~Minor in Media Arts and Design ">Communication Major ~ Minor in Media Arts and Design</p>
+   </div>
+
+</header>
+
+<main id="main-content" tabindex="-1">
+<section id="work-view" aria-label="Portfolio work">
+  <div class="projects-grid">
+
+    <!-- RECENT WORK: Replace the bracketed text and media slot with your next project.
+         Keep id/data-project="recent-work" so the menu and navigation continue to work. -->
+    <section class="project" id="recent-work" data-project="recent-work">
+      <div class="project-intro">
+      <svg class="section-circuit" aria-hidden="true" focusable="false" viewBox="0 0 1000 48" preserveAspectRatio="none">
+        <path class="circuit-track circuit-blue" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-track circuit-pink" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <path class="circuit-signal circuit-blue" pathLength="100" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-signal circuit-pink" pathLength="100" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <circle class="circuit-junction" cx="96" cy="12" r="2.2" />
+        <circle class="circuit-junction" cx="900" cy="36" r="2.2" />
+      </svg>
+
+        <h2 tabindex="-1"><a href="#recent-work">[Your recent project title]</a></h2>
+        <p class="project-subtitle">[Add a short description of the project, what you made, and the idea behind it.]</p>
+      </div>
+      <div class="media-slot recent-media-slot">
+        <span class="placeholder-label">New work placeholder</span>
+        <strong>Your next project goes here</strong>
+        <p>Replace this space with an image or video of your recent work.</p>
+      </div>
+      <p>[Add your role, the tools you used, and what you learned or achieved.]</p>
+    </section>
+
+    <!-- PROJECT 2 -->
+    <section class="project" id="mclaren" data-project="mclaren">
+      <div class="project-intro">
+      <svg class="section-circuit" aria-hidden="true" focusable="false" viewBox="0 0 1000 48" preserveAspectRatio="none">
+        <path class="circuit-track circuit-blue" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-track circuit-pink" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <path class="circuit-signal circuit-blue" pathLength="100" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-signal circuit-pink" pathLength="100" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <circle class="circuit-junction" cx="96" cy="12" r="2.2" />
+        <circle class="circuit-junction" cx="900" cy="36" r="2.2" />
+      </svg>
+
+        <h2 tabindex="-1"><a href="#mclaren">McLaren World Tour</a></h2>
+        <p class="project-subtitle">A tour-inspired collage celebrating McLaren’s drivers, team, and winning moments.</p>
+      </div>
+      <figure>
+        <img class="natural-media" loading="lazy" decoding="async"
+               src="mai_mclaren_02.jpg"
+               
+               alt="McLaren World Tour collage">
+        <figcaption>Collage of auto-cut pictures compiled and directed into an abstract array</figcaption>
+      </figure>
+
+      <p>
+       This tour style poster was curated for a final project for a media class I took where I wanted to combine fandom 
+        with a collage of different moments from my favorite sports team. The image includes different aspects and moments 
+        from the team such as the drivers, leaders, and winning moments. 
+      </p>
+    </section>
+
+    <!-- PROJECT 3 -->
+    <section class="project" id="grasslands" data-project="grasslands">
+      <div class="project-intro">
+      <svg class="section-circuit" aria-hidden="true" focusable="false" viewBox="0 0 1000 48" preserveAspectRatio="none">
+        <path class="circuit-track circuit-blue" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-track circuit-pink" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <path class="circuit-signal circuit-blue" pathLength="100" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-signal circuit-pink" pathLength="100" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <circle class="circuit-junction" cx="96" cy="12" r="2.2" />
+        <circle class="circuit-junction" cx="900" cy="36" r="2.2" />
+      </svg>
+
+        <h2 tabindex="-1"><a href="#grasslands">Grasslands: Tiny World</a></h2>
+        <p class="project-subtitle">A collaborative Unity VR experience seen from the perspective of a miniaturized human.</p>
+      </div>
+      <figure>
+        <img loading="lazy" decoding="async" src="Tiny_Grasslands.jpg" 
+           alt="Grasslands: Tiny World VR project artwork">
+        <figcaption>VR game development, experienced as a miniaturized human</figcaption>
+      </figure>
+
+      <p>
+        Grasslands: Tiny World is a collaborative virtual reality project built in Unity in 2026.
+        The experience places the player in the perspective of a miniaturized human, making scale
+        the central idea of the project. It brings my portfolio into an immersive format, where
+        the viewer takes on a role inside a virtual world.
+      </p>
+
+      <div class="project-details">
+        <dl class="project-facts">
+          <div><dt>Medium</dt><dd>Virtual reality</dd></div>
+          <div><dt>Built with</dt><dd>Unity</dd></div>
+          <div><dt>Collaboration</dt><dd>Group project · 2026</dd></div>
+        </dl>
+        <h3>A different sense of scale</h3>
+        <p>The premise starts with a change in perspective: experiencing a world as a tiny person.
+        That relationship between the player and the environment is the starting point for this VR experience.</p>
+        <!-- GRASSLANDS: Replace these prompts with accurate project details before publishing. -->
+        <div class="project-notes">
+          <section><h3>My contribution</h3><p class="placeholder-copy"><span class="placeholder-label">Details to add</span>[Explain your role on the team, what you personally designed or built, and one problem you helped solve. Credit collaborators and their contributions.]</p></section>
+          <section><h3>Progress & next steps</h3><p class="placeholder-copy"><span class="placeholder-label">Details to add</span>[State whether the project is in development or complete. Describe what a player can currently do, what you've tested, and what you plan to improve next.]</p></section>
+        </div>
+        <section class="project-media" aria-labelledby="grasslands-media-title">
+          <h3 id="grasslands-media-title">Inside the experience</h3>
+          <p>Gameplay and development images will be added here.</p>
+          <div class="media-grid">
+            <!-- Replace this placeholder with a video element pointing to your actual gameplay recording. -->
+            <div class="media-slot gameplay"><span class="placeholder-label">Gameplay video placeholder</span><strong>Show the world from the player's perspective</strong><p>Add a short recording that shows the environment, the sense of scale, and one interaction. Include captions if there is spoken audio.</p></div>
+            <!-- Replace each placeholder with a figure containing a real screenshot and caption. -->
+            <div class="media-slot"><span class="placeholder-label">Screenshot placeholder 01</span><strong>The world at a tiny scale</strong><p>Add an in-game view that makes the player's size clear, with a caption explaining what we're seeing.</p></div>
+            <div class="media-slot"><span class="placeholder-label">Screenshot placeholder 02</span><strong>A closer look at the process</strong><p>Add a Unity scene or development image showing an element you worked on. Explain your contribution in the caption.</p></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+  </div>
+  <nav class="project-pagination" aria-label="Project navigation" hidden>
+    <a id="previous-project" href="#work">← All work</a>
+    <a href="#work">All work</a>
+    <a id="next-project" href="#work">All work →</a>
+  </nav>
+</section>
+
+<section id="about-view" aria-labelledby="about-title" hidden>
+
+      <svg class="section-circuit" aria-hidden="true" focusable="false" viewBox="0 0 1000 48" preserveAspectRatio="none">
+        <path class="circuit-track circuit-blue" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-track circuit-pink" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <path class="circuit-signal circuit-blue" pathLength="100" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-signal circuit-pink" pathLength="100" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <circle class="circuit-junction" cx="96" cy="12" r="2.2" />
+        <circle class="circuit-junction" cx="900" cy="36" r="2.2" />
+      </svg>
+  <div class="about-profile">
+    <div class="about-heading">
+      <h1 id="about-title" tabindex="-1">About <span>me.</span></h1>
+      <p class="profile-name">Christopher Mai</p>
+      <p class="profile-description">Media design artist exploring stories through video, visual design, and virtual worlds.</p>
+      <a class="origin-link" href="#first-integration">See where it started <span aria-hidden="true">↓</span></a>
+    </div>
+    <!-- PROFILE PHOTO: Replace the placeholder below with:
+         <img class="profile-photo" src="profile.jpg" alt="Portrait of Christopher Mai" width="600" height="750" loading="lazy" decoding="async">
+         Keep your photo alongside this HTML file, and adjust its filename above if needed. -->
+    <div class="portrait-placeholder">
+      <span class="portrait-initials" aria-hidden="true">CM</span>
+      <strong>Your photo here</strong>
+      <p>A portrait that feels like you.</p>
+    </div>
+  </div>
+  <div class="about-cards">
+    <!-- Replace the bracketed prompts with your own writing, then remove the placeholder labels. -->
+    <section class="about-card" aria-labelledby="about-who">
+      <h2 id="about-who">Who I am</h2>
+      <p>I'm Christopher Mai, a media design artist studying Communication with a minor in Media Arts and Design at UC Santa Barbara.</p>
+      <p class="placeholder-copy"><span class="placeholder-label">Your story</span>[Add a few sentences about your background, what drew you to creative work, and one interest that makes you, you.]</p>
+    </section>
+    <section class="about-card" aria-labelledby="about-create">
+      <h2 id="about-create">What I create</h2>
+      <p>My portfolio spans video editing, collage, and virtual reality—different ways to tell stories and explore a point of view.</p>
+      <p class="placeholder-copy"><span class="placeholder-label">Your strengths</span>[Describe your strongest skills and tools, the projects you enjoy most, and how you approach the creative process.]</p>
+    </section>
+    <section class="about-card" aria-labelledby="about-next">
+      <h2 id="about-next">Where I'm headed</h2>
+      <p class="placeholder-copy"><span class="placeholder-label">Your direction</span>[Share the opportunities or collaborations you're looking for, what you want to learn next, and the kind of work you'd love to make.]</p>
+      <a class="about-contact" href="mailto:christophermai@ucsb.edu">Get in touch</a>
+    </section>
+  </div>
+
+  <section class="origin-story" id="first-integration" aria-labelledby="origin-title">
+    <div class="origin-heading">
+      <svg class="section-circuit" aria-hidden="true" focusable="false" viewBox="0 0 1000 48" preserveAspectRatio="none">
+        <path class="circuit-track circuit-blue" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-track circuit-pink" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <path class="circuit-signal circuit-blue" pathLength="100" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-signal circuit-pink" pathLength="100" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <circle class="circuit-junction" cx="96" cy="12" r="2.2" />
+        <circle class="circuit-junction" cx="900" cy="36" r="2.2" />
+      </svg>
+
+      <p class="eyebrow">Where it started</p>
+      <h2 id="origin-title" tabindex="-1">First Integration Into Media</h2>
+      <p class="project-subtitle">The first edit that got me creating.</p>
+    </div>
+    <div class="origin-layout">
+      <div class="origin-copy">
+      <p>
+        I created this video during my sophomore year of high school, driven by my interest in content creation.
+        Its imperfections reflect the process of learning new tools, finding creative shortcuts, and getting my work out into the world.
+        This project became my entry point into media creation.
+      </p>
+        <p class="origin-meta">A personal video edit · ShareFactory · 2020</p>
+      </div>
+      <figure>
+        <video controls preload="none" playsinline>
+          <source src="mai_2k20_01.mp4" type="video/mp4">
+        </video>
+        <figcaption>Gameplay clips edited in ShareFactory, then screen-recorded for YouTube.</figcaption>
+      </figure>
+    </div>
+  </section>
+</section>
+</main>
+
+<footer>
+      <svg class="section-circuit" aria-hidden="true" focusable="false" viewBox="0 0 1000 48" preserveAspectRatio="none">
+        <path class="circuit-track circuit-blue" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-track circuit-pink" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <path class="circuit-signal circuit-blue" pathLength="100" d="M 0 36 H 72 L 96 12 H 350 L 374 36 H 540" />
+        <path class="circuit-signal circuit-pink" pathLength="100" d="M 1000 12 H 924 L 900 36 H 704 L 680 12 H 584" />
+        <circle class="circuit-junction" cx="96" cy="12" r="2.2" />
+        <circle class="circuit-junction" cx="900" cy="36" r="2.2" />
+      </svg>
+
+  <p>Christopher Mai · <a href="mailto:christophermai@ucsb.edu">christophermai@ucsb.edu</a> · 2026</p>
+</footer>
+
+
+
+
+<script>
+(() => {
+  const routes = ['recent-work', 'mclaren', 'grasslands'];
+  const titles = ['Recent work', 'McLaren World Tour', 'Grasslands: Tiny World'];
+  const menu = document.querySelector('.work-menu');
+  function renderRoute(moveFocus = true) {
+    const requested = location.hash.slice(1) || 'work';
+    if (requested === 'main-content') return;
+    const showOrigin = requested === 'first-integration';
+    const route = showOrigin ? 'about' : ['work', 'about', ...routes].includes(requested) ? requested : 'work';
+    const index = routes.indexOf(route);
+    const isAbout = route === 'about';
+    document.querySelectorAll('video').forEach(video => video.pause());
+    document.body.dataset.view = isAbout ? 'about' : index >= 0 ? 'detail' : 'work';
+    document.getElementById('portfolio-intro').hidden = isAbout || index >= 0;
+    document.getElementById('work-view').hidden = isAbout;
+    document.getElementById('about-view').hidden = !isAbout;
+    document.querySelectorAll('[data-project]').forEach(project => { project.hidden = isAbout || (index >= 0 && project.dataset.project !== route); });
+    document.querySelectorAll('[data-route]').forEach(link => {
+      if (link.dataset.route === route) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+    menu.classList.toggle('has-current', index >= 0);
+    menu.open = false;
+    document.querySelector('.project-pagination').hidden = index < 0 || isAbout;
+    if (index >= 0) {
+      const previous = document.getElementById('previous-project');
+      const next = document.getElementById('next-project');
+      previous.href = '#' + routes[(index + 2) % 3];
+      next.href = '#' + routes[(index + 1) % 3];
+      previous.textContent = '← Previous project';
+      next.textContent = 'Next project →';
+      previous.setAttribute('aria-label', 'Previous project: ' + titles[(index + 2) % 3]);
+      next.setAttribute('aria-label', 'Next project: ' + titles[(index + 1) % 3]);
+    }
+    document.title = (isAbout ? 'About me' : index >= 0 ? titles[index] : 'Portfolio') + ' — Christopher Mai';
+    if (moveFocus) {
+      const heading = showOrigin ? document.getElementById('origin-title') : isAbout ? document.getElementById('about-title') : index >= 0 ? document.querySelector('#' + route + ' h2') : document.querySelector('#portfolio-intro h1');
+      heading.focus({preventScroll: true});
+    }
+    if (showOrigin) document.getElementById('first-integration').scrollIntoView({block: 'start', behavior: 'instant'});
+    else window.scrollTo({top: 0, left: 0, behavior: 'instant'});
+  }
+  window.addEventListener('hashchange', () => renderRoute());
+  document.querySelectorAll('.site-nav a, .project-pagination a, .origin-link').forEach(link => {
+    link.addEventListener('click', event => {
+      if (link.hash === location.hash) { event.preventDefault(); renderRoute(); }
+    });
+  });
+  document.addEventListener('click', event => { if (!menu.contains(event.target)) menu.open = false; });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); } });
+  document.addEventListener('focusin', event => { if (!menu.contains(event.target)) menu.open = false; });
+  function showMediaFallback(media) {
+    if (media.dataset.fallback) return;
+    media.dataset.fallback = 'true';
+    const panel = document.createElement('div');
+    panel.className = 'media-fallback';
+    const title = document.createElement('strong');
+    title.textContent = media.tagName === 'VIDEO' ? 'Video unavailable' : (media.alt || 'Artwork unavailable');
+    const detail = document.createElement('span');
+    detail.textContent = 'This project’s media could not be loaded.';
+    panel.append(title, detail);
+    media.hidden = true;
+    media.after(panel);
+  }
+  document.querySelectorAll('.project img').forEach(img => {
+    img.addEventListener('error', () => showMediaFallback(img));
+    if (img.complete && img.naturalWidth === 0) showMediaFallback(img);
+  });
+  document.querySelectorAll('video').forEach(video => {
+    video.addEventListener('error', () => showMediaFallback(video));
+    video.querySelectorAll('source').forEach(source => source.addEventListener('error', () => showMediaFallback(video)));
+    if (video.error || video.networkState === 3) showMediaFallback(video);
+  });
+  renderRoute(false);
+})();
+</script>
+
+<script>
+(() => {
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const rails = Array.from(document.querySelectorAll('.edge-laser')).map((element, side) => ({
+    element, side, paths: Array.from(element.querySelectorAll('path'))
+  }));
+  const circuits = Array.from(document.querySelectorAll('.section-circuit')).map(element => ({
+    element, signals: Array.from(element.querySelectorAll('.circuit-signal'))
+  }));
+  let frame = 0;
+  let pointer = null;
+  const clamp = value => Math.max(0, Math.min(1, value));
+
+  function updateLines() {
+    frame = 0;
+    if (reducedMotion.matches || document.hidden) return;
+    const height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    const scrollRange = Math.max(0, height - innerHeight);
+    const progress = scrollRange > 0 ? clamp(scrollY / scrollRange) : 0;
+    // Measure visible separator strips together before writing any styles.
+    const visibleCircuits = circuits.flatMap(circuit => {
+      const rect = circuit.element.getBoundingClientRect();
+      if (!rect.width || !rect.height || rect.bottom < 0 || rect.top > innerHeight) return [];
+      const travel = clamp((innerHeight * .93 - rect.top) / Math.max(1, innerHeight * .86));
+      return [{circuit, travel}];
+    });
+    // Keep hover response inside the margin, far from the central work area.
+    const reach = Math.min(150, Math.max(16, (innerWidth - 960) / 2));
+    const pointerInRailHeight = pointer && pointer.y > 100 && pointer.y < innerHeight - 26;
+    for (const rail of rails) {
+      let proximity = 0;
+      if (pointerInRailHeight && finePointer.matches) {
+        const distance = rail.side === 0 ? pointer.x : innerWidth - pointer.x;
+        proximity = clamp(1 - distance / reach);
+      }
+      rail.element.style.setProperty('--edge-proximity', proximity.toFixed(3));
+      rail.element.style.setProperty('--node-opacity', (.12 + .26 * (1 + Math.cos(progress * Math.PI * 2 + rail.side)) / 2).toFixed(3));
+      rail.paths.forEach((path, index) => {
+        // Offset paths independently, so color passes gently disappear and
+        // reappear as the visitor scrolls down or retraces their steps upward.
+        const offset = 8 - progress * 135 - index * 22 - rail.side * 12;
+        const fade = .58 + .42 * (1 + Math.cos((progress * 1.35 + index * .18 + rail.side * .11) * Math.PI * 2)) / 2;
+        const colorOpacity = [1, .60, .55][index] ?? .55;
+        path.style.setProperty('--line-offset', offset.toFixed(3));
+        path.style.setProperty('--line-opacity', (fade * colorOpacity).toFixed(3));
+      });
+    }
+    for (const {circuit, travel} of visibleCircuits) {
+      // One short pass as each strip crosses the viewport. A faint fixed
+      // track remains when the brighter signal fades at either end.
+      const envelope = Math.sin(travel * Math.PI);
+      circuit.element.style.setProperty('--junction-opacity', (.22 + envelope * .23).toFixed(3));
+      circuit.signals.forEach((signal, index) => {
+        const phase = clamp(travel * 1.12 - index * .12);
+        signal.style.setProperty('--signal-offset', (12 - phase * 110).toFixed(3));
+        signal.style.setProperty('--signal-opacity', (envelope * (index ? .36 : .48)).toFixed(3));
+      });
+    }
+  }
+  function scheduleUpdate() {
+    if (!frame && !reducedMotion.matches && !document.hidden) frame = requestAnimationFrame(updateLines);
+  }
+  function resetPointer() { pointer = null; scheduleUpdate(); }
+  function syncMotion() {
+    document.documentElement.classList.toggle('laser-interactive', !reducedMotion.matches);
+    if (reducedMotion.matches) {
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+      pointer = null;
+      rails.forEach(rail => rail.element.style.setProperty('--edge-proximity', '0'));
+    } else scheduleUpdate();
+  }
+  // Updates are batched into at most one frame per input; nothing runs at idle.
+  addEventListener('scroll', scheduleUpdate, {passive: true});
+  addEventListener('resize', scheduleUpdate, {passive: true});
+  addEventListener('hashchange', scheduleUpdate);
+  addEventListener('pageshow', scheduleUpdate);
+  addEventListener('blur', resetPointer);
+  document.addEventListener('pointermove', event => {
+    if (!finePointer.matches || reducedMotion.matches || event.pointerType === 'touch') return;
+    const reach = Math.min(150, Math.max(16, (innerWidth - 960) / 2));
+    const nearEdge = event.clientX < reach || event.clientX > innerWidth - reach;
+    if (!nearEdge || event.clientY <= 100 || event.clientY >= innerHeight - 26) {
+      if (pointer) resetPointer();
+      return;
+    }
+    pointer = {x: event.clientX, y: event.clientY};
+    scheduleUpdate();
+  }, {passive: true});
+  document.documentElement.addEventListener('pointerleave', resetPointer);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+      resetPointer();
+    } else scheduleUpdate();
+  });
+  reducedMotion.addEventListener('change', syncMotion);
+  finePointer.addEventListener('change', resetPointer);
+  // Media loading and route changes can alter the available scroll distance.
+  if ('ResizeObserver' in window) new ResizeObserver(scheduleUpdate).observe(document.body);
+  syncMotion();
+})();
+</script>
+
+<noscript><style>.project { opacity: 1; filter: none; transform: none; } #about-view[hidden] { display: block !important; } body { padding-top: 82px; }</style><p style="text-align:center">JavaScript is disabled. All projects and the About Me section are shown on this page.</p></noscript>
+
+</body>
+</html>
