@@ -86,7 +86,7 @@
         <p class="project-subtitle">[Add a short description of the project, what you made, and the idea behind it.]</p>
       </div>
      
-      <figure class='recent-media-slot">
+      <figure class="recent-media-slot">
         <img
           src="Hypnogicmainphoto.jpeg"
           alt="The completed Hynagogic Tent 
@@ -99,10 +99,6 @@
       </figure>
         
         
-        <span class="placeholder-label">New work placeholder</span>
-        <strong>Your next project goes here</strong>
-        <p>Replace this space with an image or video of your recent work.</p>
-      </div>
       <p>[Add your role, the tools you used, and what you learned or achieved.]</p>
       <div class="project-details recent-group-details">
         <h3>A group project</h3>
@@ -488,7 +484,7 @@
  const projects = [
  {id:'mclaren',title:'McLaren World Tour',image:'mai_mclaren_02.jpg',meta:'Collage · Year to add · Independent project'},
  {id:'grasslands',title:'Grasslands: Tiny World',image:'Tiny_Grasslands.jpg',meta:'Virtual reality · 2026 · Group project'},
- {id:'recent-work',title:'Hypnagogic Tent',image:Hypnogicmainphoto.jpeg,meta:'Media Installation · 2026 · Group project'}
+ {id:'recent-work',title:'Hypnagogic Tent',image:'Hypnogicmainphoto.jpeg',meta:'Media Installation · 2026 · Group project'}
  ];
  const root=document.createElement('section');root.className='wheel-showcase';root.setAttribute('aria-label','Selected works');
  root.innerHTML=`<div class="wheel-topline"><strong>Selected works</strong></div><div class="wheel-stage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Project wheel. Use up and down arrow keys."><svg class="wheel-orbit" viewBox="0 0 550 550" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><circle class="track" cx="275" cy="275" r="235"/><circle class="track" cx="275" cy="275" r="255"/><circle class="beam" pathLength="100" cx="275" cy="275" r="235"/><circle class="beam pink" pathLength="100" cx="275" cy="275" r="255"/></svg></div><span class="wheel-position sr-only" aria-live="polite">01 / 03</span>`;
