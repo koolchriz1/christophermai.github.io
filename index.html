@@ -82,10 +82,23 @@
         <circle class="circuit-junction" cx="900" cy="36" r="2.2" />
       </svg>
 
-        <h2 tabindex="-1"><a href="#recent-work">[Hynagogic Tent]</a></h2>
+        <h2 tabindex="-1"><a href="#recent-work">Hynagogic Tent</a></h2>
         <p class="project-subtitle">[Add a short description of the project, what you made, and the idea behind it.]</p>
       </div>
-      <div class="media-slot recent-media-slot">
+     
+      <figure class='recent-media-slot">
+        <img
+          src="Hypnogicmainphoto.jpeg"
+          alt="The completed Hynagogic Tent 
+        installation"
+          loading="lazy"
+          decoding="async"
+        >
+        <figcaption>The completed Hypnagogic Tent 
+      installation.</figcaption>
+      </figure>
+        
+        
         <span class="placeholder-label">New work placeholder</span>
         <strong>Your next project goes here</strong>
         <p>Replace this space with an image or video of your recent work.</p>
@@ -305,7 +318,7 @@
 <script>
 (() => {
   const routes = ['recent-work', 'mclaren', 'grasslands'];
-  const titles = ['Recent work', 'McLaren World Tour', 'Grasslands: Tiny World'];
+  const titles = ['Hypnagogic Tent', 'McLaren World Tour', 'Grasslands: Tiny World'];
   function renderRoute(moveFocus = true) {
     const requested = location.hash.slice(1) || 'work';
     if (requested === 'main-content') return;
@@ -475,7 +488,7 @@
  const projects = [
  {id:'mclaren',title:'McLaren World Tour',image:'mai_mclaren_02.jpg',meta:'Collage · Year to add · Independent project'},
  {id:'grasslands',title:'Grasslands: Tiny World',image:'Tiny_Grasslands.jpg',meta:'Virtual reality · 2026 · Group project'},
- {id:'recent-work',title:'Recent work',image:null,meta:'Project type to add · Year to add · Group project'}
+ {id:'recent-work',title:'Hypnagogic Tent',image:Hypnogicmainphoto.jpeg,meta:'Media Installation · 2026 · Group project'}
  ];
  const root=document.createElement('section');root.className='wheel-showcase';root.setAttribute('aria-label','Selected works');
  root.innerHTML=`<div class="wheel-topline"><strong>Selected works</strong></div><div class="wheel-stage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Project wheel. Use up and down arrow keys."><svg class="wheel-orbit" viewBox="0 0 550 550" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><circle class="track" cx="275" cy="275" r="235"/><circle class="track" cx="275" cy="275" r="255"/><circle class="beam" pathLength="100" cx="275" cy="275" r="235"/><circle class="beam pink" pathLength="100" cx="275" cy="275" r="255"/></svg></div><span class="wheel-position sr-only" aria-live="polite">01 / 03</span>`;
